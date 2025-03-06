@@ -2,6 +2,24 @@
 
 Floodgate is a runtime patching system for C/C++ applications that allows you to selectively disable functions in a running program without restarting it. When a function is patched, it will immediately return a default value instead of executing.
 
+## TODO(ordered by priority):
+- [ ] Bring back the libwunwind shit.
+- [ ] Make the bitmap limitless.
+- [ ] Make the initialization scalable for large programs and address resolution dynamic.
+- [ ] Windows support.
+- [ ] Inline the runtime check. Currently every function does a call with a mutex lock over the bitmap. It should be much 
+      more performant to have few instructions(binop, cmp, jmp) instead of a whole function call and a mutex lock.
+- [ ] Static builds. 
+- [ ] Add conditional declarative patching. Right now it is just a boolean patch which is already a very well known 
+      technique [see Talos](https://ieeexplore.ieee.org/document/7546526)
+- [ ] Jit for hot-patch 
+
+## References:
+- [Talos](https://ieeexplore.ieee.org/document/7546526)
+- [Instaguard](https://www.ndss-symposium.org/wp-content/uploads/2018/03/ndss2018_08-2_Chen_paper.pdf)
+- [LibUnwind Examples](https://github.com/daniel-thompson/libunwind-examples)
+- [ASMJit](https://github.com/asmjit/asmjit) 
+
 ## Features
 
 - **Dynamic Patching**: Patch functions at runtime without restarting the application
