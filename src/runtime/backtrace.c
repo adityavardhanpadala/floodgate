@@ -220,12 +220,9 @@ int should_execute_function(uintptr_t func_addr) {
     if (func_index == SIZE_MAX)
         return 1;
     
-    // Check bitmap (with lock)
-    pthread_mutex_lock(&bitmap_mutex);
     size_t byte_index = func_index / 8;
     uint8_t bit_mask = 1 << (func_index % 8);
     int should_execute = (function_bitmap[byte_index] & bit_mask) != 0;
-    pthread_mutex_unlock(&bitmap_mutex);
     
     return should_execute;
 }
